@@ -54,7 +54,7 @@ public class SiteHomeFilter implements Filter {
         String userId = AuthenticationUtil.getUserId(request);
         
         // Site home page redirection
-        if (request.getPathInfo().indexOf("/site/") != -1 && request.getPathInfo().endsWith("/dashboard")) {
+        if (request.getPathInfo() != null && request.getPathInfo().indexOf("/site/") != -1 && request.getPathInfo().endsWith("/dashboard")) {
             if (doRedirect(request, request.getPathInfo())) {
                 
                 try {
@@ -80,7 +80,7 @@ public class SiteHomeFilter implements Filter {
             }
         }
         // If out of site scope, clear session
-        if (request.getPathInfo().indexOf("/site/") == -1) {
+        if (request.getPathInfo() == null || request.getPathInfo().indexOf("/site/") == -1) {
             clearAttribute(request);
         }
         
